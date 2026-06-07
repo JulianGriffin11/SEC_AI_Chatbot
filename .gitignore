@@ -1,0 +1,13 @@
+# Ignore the virtual environment folder created by uv
+.venv/
+
+# Ignore local configuration and secret environment variables
+.env
+.env.local
+
+# Ignore Python cache files (compiled code that your Mac builds automatically)
+__pycache__/
+*.pyc
+
+# Ignore Mac system files
+.DS_Store
