@@ -28,13 +28,17 @@ export function ChatLayout() {
   return (
     <ThreadsProvider>
       <SidebarProvider>
-        <ThreadSidebar />
-        <SidebarInset className="flex h-svh min-h-0 flex-col">
-          <ChatHeader />
-          <div className="flex min-h-0 flex-1 flex-col">
-            <Outlet />
-          </div>
-        </SidebarInset>
+        <div className="chat-app-shell w-full">
+          <ThreadSidebar />
+          <SidebarInset className="flex h-svh min-h-0 flex-col">
+            <div className="bg-white/60 backdrop-blur-sm border-b border-border">
+              <ChatHeader />
+            </div>
+            <div className="flex min-h-0 flex-1 flex-col">
+              <Outlet />
+            </div>
+          </SidebarInset>
+        </div>
       </SidebarProvider>
     </ThreadsProvider>
   )

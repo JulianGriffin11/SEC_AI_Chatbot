@@ -28,7 +28,7 @@ export function ChatInput({ status, onSend, onStop }: ChatInputProps) {
   }
 
   return (
-    <div className="bg-background px-4 pb-4">
+    <div className="chat-input-shell px-4 pb-4">
       <div className="mx-auto w-full max-w-3xl">
         <PromptInput
           value={input}

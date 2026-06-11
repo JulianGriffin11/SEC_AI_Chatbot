@@ -52,7 +52,7 @@ export function AssistantMessage({
   const hasNoEvidence = !isStreaming && text.length > 0 && citations.length === 0
 
   return (
-    <div className="min-w-0 space-y-3">
+    <div className="min-w-0 space-y-3 message-assistant">
       {text ? (
         <AssistantMarkdown
           text={text}
