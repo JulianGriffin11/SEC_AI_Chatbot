@@ -12,15 +12,25 @@ COPY package.json pnpm-lock.yaml .npmrc ./
 # Install dependencies
 RUN pnpm install --frozen-lockfile
 
+# ... (rest of the top of Dockerfile remains the same)
+
 # Copy the rest of the application source code
 COPY . .
 
-# 🚨 CRUCIAL FIX: Inject the build argument right before running the build command
+# 🚨 THE FIX: Inject ALL required Vite build arguments here
 ARG VITE_API_BASE_URL
 ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
 
+ARG VITE_SUPABASE_URL
+ENV VITE_SUPABASE_URL=$VITE_SUPABASE_URL
+
+ARG VITE_SUPABASE_ANON_KEY
+ENV VITE_SUPABASE_ANON_KEY=$VITE_SUPABASE_ANON_KEY
+
 # Compile production assets
 RUN pnpm build
+
+# ... (rest of the bottom of Dockerfile remains the same)
 
 # Stage 2: Production server stage
 FROM caddy:2-alpine
