@@ -43,15 +43,15 @@ export function MessageList({
   const showPipeline = isBusy && !lastIsStreamingAssistant
 
   return (
-    <ChatContainerRoot className="relative flex-1">
-      <ChatContainerContent className="mx-auto w-full max-w-3xl gap-6 px-4 py-6">
+    <ChatContainerRoot className="relative flex-1 bg-white">
+      <ChatContainerContent className="mx-auto w-full max-w-3xl gap-6 px-4 py-8">
         {messages.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-6 py-12 text-center">
-            <div className="space-y-1">
-              <h2 className="text-lg font-semibold text-foreground">
+            <div className="space-y-2">
+              <h2 className="text-xl font-semibold tracking-tight text-gray-900">
                 Ask about SEC filings
               </h2>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-gray-600 max-w-md">
                 Every answer is grounded in source documents with citations.
               </p>
             </div>

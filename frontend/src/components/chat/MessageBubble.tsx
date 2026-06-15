@@ -30,8 +30,8 @@ export function MessageBubble({
   const text = textFromMessage(message)
 
   return (
-    <div className="flex justify-end">
-      <div className="message-user">
+    <div className="flex justify-end animate-slide-up">
+      <div className="message-user rounded-2xl bg-blue-600 text-white px-4 py-2.5 max-w-xs">
         <div className="text-sm leading-relaxed whitespace-pre-wrap">{text}</div>
       </div>
     </div>

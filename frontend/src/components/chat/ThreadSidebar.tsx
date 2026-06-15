@@ -82,12 +82,12 @@ export function ThreadSidebar() {
 
   return (
     <>
-      <Sidebar>
-        <SidebarHeader className="gap-3 p-3">
+      <Sidebar className="border-r border-gray-200 bg-gray-50">
+        <SidebarHeader className="gap-3 p-3 border-b border-gray-200">
           <Logo className="px-1 py-1" />
           <Button
             variant="outline"
-            className="w-full justify-start gap-2 border-dashed bg-background/50 text-muted-foreground shadow-none hover:bg-muted/50 hover:text-foreground"
+            className="w-full justify-start gap-2 border-gray-300 bg-white text-gray-700 shadow-sm hover:bg-gray-100 hover:border-gray-400 transition-smooth"
             onClick={() => void handleNewChat()}
             disabled={isCreating}
           >
@@ -112,19 +112,19 @@ export function ThreadSidebar() {
           ) : null}
 
           {!isLoading && error ? (
-            <p className="px-3 py-2 text-sm text-destructive" role="alert">
+            <p className="px-3 py-2 text-sm text-red-600" role="alert">
               {error}
             </p>
           ) : null}
 
           {!isLoading && !error && threads.length === 0 ? (
-            <p className="px-3 py-2 text-sm text-muted-foreground">No conversations yet.</p>
+            <p className="px-3 py-2 text-sm text-gray-500">No conversations yet.</p>
           ) : null}
 
           {!isLoading && !error
             ? groups.map((group) => (
                 <SidebarGroup key={group.label}>
-                  <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
+                  <SidebarGroupLabel className="text-gray-600">{group.label}</SidebarGroupLabel>
                   <SidebarGroupContent>
                     <SidebarMenu>
                       {group.items.map((thread) => (
@@ -133,6 +133,7 @@ export function ThreadSidebar() {
                             asChild
                             isActive={thread.id === threadId}
                             tooltip={thread.title}
+                            className="hover:bg-white hover:border-gray-300 transition-smooth"
                           >
                             <Link
                               to={`/chats/${thread.id}`}
@@ -140,14 +141,14 @@ export function ThreadSidebar() {
                                 if (isMobile) setOpenMobile(false)
                               }}
                             >
-                              <span className="truncate">{thread.title}</span>
+                              <span className="truncate text-gray-900">{thread.title}</span>
                             </Link>
                           </SidebarMenuButton>
                           <SidebarMenuAction
                             showOnHover
                             aria-label={`Delete conversation: ${thread.title}`}
                             title="Delete conversation"
-                            className="text-muted-foreground hover:bg-destructive/10 hover:text-destructive focus-visible:text-destructive"
+                            className="text-gray-400 hover:bg-red-50 hover:text-red-600 transition-smooth"
                             disabled={isDeleting}
                             onClick={(event) => {
                               event.preventDefault()
@@ -170,7 +171,7 @@ export function ThreadSidebar() {
             : null}
         </SidebarContent>
 
-        <SidebarFooter>
+        <SidebarFooter className="border-t border-gray-200">
           <UserMenu />
         </SidebarFooter>
       </Sidebar>

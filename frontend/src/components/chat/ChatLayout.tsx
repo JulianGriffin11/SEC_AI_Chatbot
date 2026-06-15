@@ -15,11 +15,13 @@ function ChatHeader() {
   const activeThread = threads.find((thread) => thread.id === threadId)
 
   return (
-    <header className="flex h-14 shrink-0 items-center gap-2 border-b bg-background/80 px-3 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <SidebarTrigger className="text-muted-foreground" />
-      <span className="truncate text-sm font-medium text-foreground">
+    <header className="flex h-16 shrink-0 items-center justify-center border-b border-gray-200 bg-white px-3 transition-smooth relative">
+      <div className="absolute left-3">
+        <SidebarTrigger className="text-gray-500 hover:text-gray-700 transition-smooth" />
+      </div>
+      <h2 className="text-lg font-semibold text-gray-900 text-center truncate max-w-md">
         {activeThread?.title ?? 'Document Copilot'}
-      </span>
+      </h2>
     </header>
   )
 }
@@ -30,10 +32,8 @@ export function ChatLayout() {
       <SidebarProvider>
         <div className="chat-app-shell w-full">
           <ThreadSidebar />
-          <SidebarInset className="flex h-svh min-h-0 flex-col">
-            <div className="bg-white/60 backdrop-blur-sm border-b border-border">
-              <ChatHeader />
-            </div>
+          <SidebarInset className="flex h-svh min-h-0 flex-col bg-white">
+            <ChatHeader />
             <div className="flex min-h-0 flex-1 flex-col">
               <Outlet />
             </div>
