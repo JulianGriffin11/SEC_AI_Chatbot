@@ -1,23 +1,28 @@
+# Stage 1: Build stage
 FROM node:lts-alpine AS build
+
+# Enable corepack for pnpm
+RUN corepack enable && corepack prepare pnpm@10 --activate
 
 WORKDIR /app
 
-RUN corepack enable && corepack prepare pnpm@10 --activate
-
+# Copy dependency manifests
 COPY package.json pnpm-lock.yaml .npmrc ./
+
+# Install dependencies
 RUN pnpm install --frozen-lockfile
 
+# Copy the rest of the application source code
 COPY . .
 
+# 🚨 CRUCIAL FIX: Inject the build argument right before running the build command
 ARG VITE_API_BASE_URL
-ARG VITE_SUPABASE_URL
-ARG VITE_SUPABASE_ANON_KEY
-ENV VITE_API_BASE_URL=$VITE_API_BASE_URL \
-    VITE_SUPABASE_URL=$VITE_SUPABASE_URL \
-    VITE_SUPABASE_ANON_KEY=$VITE_SUPABASE_ANON_KEY
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
 
+# Compile production assets
 RUN pnpm build
 
+# Stage 2: Production server stage
 FROM caddy:2-alpine
 
 COPY Caddyfile /etc/caddy/Caddyfile
