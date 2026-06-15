@@ -14,7 +14,7 @@ const PIPELINE_STEPS = [
   { stage: 'streaming', label: 'Generating response', order: 5 },
 ]
 
-export function PipelineStatus({ isSubmitted, pipelineStatus }: PipelineStatusProps) {
+export function PipelineStatus({ pipelineStatus }: PipelineStatusProps) {
   const currentStage = pipelineStatus?.stage || 'analyzing'
   const currentStepIndex = PIPELINE_STEPS.findIndex((s) => s.stage === currentStage)
 
